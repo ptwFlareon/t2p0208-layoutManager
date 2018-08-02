@@ -1,5 +1,8 @@
 package br.com.adrianob.layout;
 
+import br.com.lucasj.TelaJeffersonFactory;
+import br.com.lucasj.TelaJhonsonFactory;
+import br.com.lucasj.TelaJohannFactory;
 import javax.swing.JFrame;
 
 /**
@@ -14,10 +17,10 @@ public class LayoutManagers {
     public static void main(String[] args) {
         TelaFactory[] minhasFabricasDeTela = new TelaFactory[4];
         minhasFabricasDeTela[0] = new TelaAdrianoFactory();
-        //minhasFabricasDeTela[1] = new TelaAdrianoFactory(); //Instanciar sua fabrica de tela 1 aqui
-        //minhasFabricasDeTela[2] = new TelaAdrianoFactory(); //Instanciar sua fabrica de tela 2 aqui
-        //minhasFabricasDeTela[3] = new TelaAdrianoFactory(); //Instanciar sua fabrica de tela 3 aqui
+        minhasFabricasDeTela[1] = new TelaJhonsonFactory(); //Instanciar sua fabrica de tela 1 aqui
+        minhasFabricasDeTela[2] = new TelaJohannFactory(); //Instanciar sua fabrica de tela 2 aqui
+        minhasFabricasDeTela[3] = new TelaJeffersonFactory(); //Instanciar sua fabrica de tela 3 aqui
         new Sample(minhasFabricasDeTela).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+
 }
