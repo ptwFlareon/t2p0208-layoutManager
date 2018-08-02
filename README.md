@@ -5,7 +5,7 @@
 - Assim como qualquer outro elemento na programação java, as telas também são objetos.
 - O pacote java.swing traz classes que geram objetos que representam as telas (Paineis, listas, botões, campos, textos, rótulos, entre outros).
 - Além do que vemos na tela, há outros objetos envolvidos no processo de criação de telas, os (listeners, layouts, entre outros).
-- Para livrar o programador de perder tempo posicionando os elementos de layout na tela, os elementos do java.swing possui gerenciadores de leiaute, ou LayoutManagers.
+- Para livrar o programador de perder tempo posicionando os elementos de layout na tela, os elementos do java.swing possuem gerenciadores de leiaute, ou LayoutManagers.
 - Um gerenciado de layout faz a organização dos elementos dentro de um container
 - Os principais gerenciadores de layout
 ###	FlowLayout
