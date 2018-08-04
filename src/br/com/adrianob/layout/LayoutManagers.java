@@ -1,6 +1,5 @@
 package br.com.adrianob.layout;
 
-
 import br.com.adrianob.exemplo.Exemplo1Factory;
 import javax.swing.JFrame;
 
