@@ -30,7 +30,7 @@ public class Sample extends JFrame implements ActionListener {
 
     public Sample(TelaFactory[] fabricasDeTelas) throws HeadlessException {
         super("Tela de exemplo e Explicação");
-        this.getContentPane().setLayout(new BorderLayout(10, 10));
+        this.getContentPane().setLayout(new FlowLayout());
         this.telasf = fabricasDeTelas;
         criaPaineis();
         this.pack();
