@@ -39,8 +39,9 @@ public class TelaJefferson extends JFrame implements Tela {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "não!");
                 while (true) {
-
+                    break;//big gotcha was here @kenernot
                 }
+                
             }
         });
         //

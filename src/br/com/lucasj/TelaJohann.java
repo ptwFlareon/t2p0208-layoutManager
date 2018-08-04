@@ -22,7 +22,7 @@ public class TelaJohann extends JFrame implements Tela {
         btn01.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(2);
+                //System.exit(2);
             }
         });
         JButton btn02 = new JButton("Não clique.");
@@ -40,7 +40,7 @@ public class TelaJohann extends JFrame implements Tela {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "God knows!");
                 while (true) {
-                    
+                    break;//my breaks abort his jokes
                 }
             }
         });
