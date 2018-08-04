@@ -1,5 +1,6 @@
 package br.com.adrianob.layout;
 
+
 import br.com.adrianob.exemplo.Exemplo1Factory;
 import javax.swing.JFrame;
 
@@ -20,5 +21,5 @@ public class LayoutManagers {
         //minhasFabricasDeTela[3] = new TelaAdrianoFactory(); //Instanciar sua fabrica de tela 3 aqui
         new Sample(minhasFabricasDeTela).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+
 }
