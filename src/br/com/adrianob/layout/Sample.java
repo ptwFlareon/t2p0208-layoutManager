@@ -2,7 +2,6 @@ package br.com.adrianob.layout;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -10,15 +9,16 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -30,18 +30,18 @@ public class Sample extends JFrame implements ActionListener {
 
     public Sample(TelaFactory[] fabricasDeTelas) throws HeadlessException {
         super("Tela de exemplo e Explicação");
-        this.getContentPane().setLayout(new FlowLayout());
+        this.getContentPane().setLayout(new GridLayout(2, 0,10,10));
         this.telasf = fabricasDeTelas;
         criaPaineis();
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     private void criaPaineis() {
         criaPainelCentral();
         criaPainelSuperior();
-        criaPainelInferior();
         criaPainelEsquerda();
         criaPainelDireita();
     }
@@ -59,23 +59,6 @@ public class Sample extends JFrame implements ActionListener {
         pnsup.setText(meuTexto.toString());
     }
 
-    private void criaPainelInferior() {
-        JPanel pninferior = new JPanel(new GridLayout(2, 2, 0, 0));
-        this.add(pninferior, BorderLayout.SOUTH);
-        if (telasf.length > 4) {
-            JOptionPane.showMessageDialog(this, "Você deve informar até 4 fábricas de telas!");
-        }
-        for (int i = 0; i < telasf.length; i++) {
-            TelaFactory telaFactory = telasf[i];
-            if (telaFactory != null) {
-                JButton btn = new JButton("Abrir tela " + telaFactory.getNome());
-                btn.setActionCommand(Integer.toString(i));
-                btn.addActionListener(this);
-                pninferior.add(btn);
-            }
-        }
-    }
-
     private void criaPainelCentral() {
         JPanel pn = new JPanel();
         URL resource = getClass().getResource("/resources/indice-imagens.png");
@@ -89,40 +72,43 @@ public class Sample extends JFrame implements ActionListener {
         }
         this.add(pn, BorderLayout.CENTER);
     }
-
+    private JPanel top10 = null;
+    private int[] idxTop = new int[]{7,10,12,13,19,20,21,27,30}; 
     private void criaPainelEsquerda() {
-        JPanel pn = new JPanel(new FlowLayout());
-
-        JTextArea txt = new JTextArea(""
-                + "Este texto está em textarea,\r\n "
-                + "é um exemplo de painel alinhado a WEAST. \r\n"
-                + "No quadro que está no centro há uma Label\r\n"
-                + " contendo uma imagem. \r\n"
-                + "Esta imagem é um índice para os nomes de arquivos de imagens \r\n"
-                + "que existe no pacote resources deste projeto.");
-        JScrollPane scroll = new JScrollPane(txt);
-        scroll.setPreferredSize(new Dimension(200, 600));
-        pn.add(scroll);
-        this.add(pn, BorderLayout.WEST);
+        top10 = new JPanel(new GridLayout(3,3));
+        
+        top10.setBorder(BorderFactory.createTitledBorder("9 telas mais criativas"));
+        this.add(top10);
     }
 
     private void criaPainelDireita() {
-        JPanel pn = new JPanel(new GridLayout(0, 1));
+        JPanel pn = new JPanel(new GridLayout(7, 3,2,2));
+        pn.setBorder(BorderFactory.createTitledBorder("Todas as telas"));
         JScrollPane scroll = new JScrollPane(pn);
         scroll.setPreferredSize(new Dimension(200, 600));
-        this.add(scroll, BorderLayout.EAST);
-        for (int i = 1; i <= 96; i++) {
-            try {
-                URL resource = getClass().getResource("/resources/" + i + ".png");
-                if (resource != null) {
-                    File file = new File(resource.toURI());
-                    ImageIcon img = new ImageIcon(file.getPath());
-                    JButton btn = new JButton("Botão " + i, img);
-                    btn.setIconTextGap(2);
-                    pn.add(btn);
+        this.add(scroll, 0);
+        for (int i = 0; i < telasf.length; i++) {
+            TelaFactory telaFactory = telasf[i];
+
+            if (telaFactory != null) {
+                try {
+                    URL resource = getClass().getResource("/resources/" + i + ".png");
+                    if (resource != null) {
+                        File file = new File(resource.toURI());
+                        ImageIcon img = new ImageIcon(file.getPath());
+                        JButton btn = new JButton("Abrir tela " + telaFactory.getNome(), img);
+                        btn.setIconTextGap(2);
+                        btn.setActionCommand(Integer.toString(i));
+                        btn.addActionListener(this);
+                        pn.add(btn);
+//                        System.out.println(Arrays.binarySearch(idxTop, i));
+                        if ( Arrays.binarySearch(idxTop, i) >= 0 ){
+                            top10.add(btn);
+                        }
+                    }
+                } catch (URISyntaxException ex) {
+                    System.out.println(ex.getMessage());
                 }
-            } catch (URISyntaxException ex) {
-                System.out.println(ex.getMessage());
             }
         }
     }
